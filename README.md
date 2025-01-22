@@ -149,57 +149,81 @@ The same is true for the non-separable data, although it seems to never reach co
 
 The voting data was randomly split into 70-30 training/testing datasets where the training set was used to train the perceptron model. The training set is shuffled before each epoch. After training, the test set was used to measure the accuracy of the model. The table below shows the result of 5 independent training on this data.
 
-\begin{center}
-\begin{tabular}{|p{2.2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{1.9cm}|} 
- \hline
-  & Trial 1 & Trial 2 & Trial 3 & Trial 4 & Trial 5 & Average \\ 
- \hline \hline
- \# of epochs & 36 & 31 & 13 & 20 & 9 & 21.8 \\
- \hline
- Accuracy(\%) & 94.96 & 94.96 & 90.65 & 96.40 & 93.53 & 94.10\\
- \hline
- Final weights & -0.1 -0.5 -0.8  1.7  0.5 -0.   0.3  0.6 -0.7  0.3 -0.9 -0.  -0.1 -0.2 -0.4  0.1 -0.9 & 0.  -0.2 -0.4  1.6  0.4 -0.1  0.4  0.6 -0.7  0.2 -1.1  0.1  0.1  0. -0.1  0.4 -1.4 & -0.1 -0.4 -0.9  1.7  0.3 -0.5  0.4  0.1 -0.6  0.6 -0.4  0.2  0.2  0.4 -0.4  0.2 -0.7 & -0.  -0.1 -0.8  1.6  0.2 -0.2  0.5  0.7 -0.5  0.4 -0.7  0.1  0.1 -0.1 -0.6  0.1 -0.9  & -0.1 -0.2 -0.7  1.4 -0.2 -0.2  0.2  0.4 -0.4  0.3 -0.7  0.1  0.1 -0.1 -0.5  0.2 -0.6 & -0.06 -0.28 -0.72  1.6   0.24 -0.2   0.36  0.48 -0.58  0.36 -0.76  0.1 0.08  0.   -0.4   0.2  -0.9 \\
- \hline
-\end{tabular}
-\end{center}
+<table align="center">
+  <thead align="left">
+    <tr>
+      <th></th>
+      <th>Trial 1</th>
+      <th>Trial 2</th>
+      <th>Trial 3</th>
+      <th>Trial 4</th>
+      <th>Trial 5</th>
+      <th>Average</th>
+    </tr>
+  </thead>
+  <tbody align="left">
+    <tr>
+      <th># of epochs</th>
+      <th>36</th>
+      <th>31</th>
+      <th>13</th>
+      <th>20</th>
+      <th>9</th>
+      <th>21.8</th>
+    </tr>
+    <tr>
+      <th>Accuracy (%)</th>
+      <th>94.96</th>
+      <th>94.96</th>
+      <th>90.65</th>
+      <th>96.40</th>
+      <th>93.53</th>
+      <th>94.10</th>
+    </tr>
+    <tr>
+      <th>Final weights</th>
+      <th>-0.1 -0.5 -0.8  1.7  0.5 -0.   0.3  0.6 -0.7  0.3 -0.9 -0.  -0.1 -0.2 -0.4  0.1 -0.9</th>
+      <th>0.  -0.2 -0.4  1.6  0.4 -0.1  0.4  0.6 -0.7  0.2 -1.1  0.1  0.1  0. -0.1  0.4 -1.4</th>
+      <th>-0.1 -0.4 -0.9  1.7  0.3 -0.5  0.4  0.1 -0.6  0.6 -0.4  0.2  0.2  0.4 -0.4  0.2 -0.7</th> 
+      <th>-0.  -0.1 -0.8  1.6  0.2 -0.2  0.5  0.7 -0.5  0.4 -0.7  0.1  0.1 -0.1 -0.6  0.1 -0.9</th> 
+      <th>-0.1 -0.2 -0.7  1.4 -0.2 -0.2  0.2  0.4 -0.4  0.3 -0.7  0.1  0.1 -0.1 -0.5  0.2 -0.6</th> 
+      <th>-0.06 -0.28 -0.72  1.6   0.24 -0.2   0.36  0.48 -0.58  0.36 -0.76  0.1 0.08  0.   -0.4   0.2  -0.9</th>
+    </tr>
+  </tbody>
+</table>
 
-From these weights, we can see that the 4th attribute, which is physician-fee-freeze, the 11th attribute, immigration, and the 3rd attribute, adoption-of-the-budget-resolution, contributes the most towards a person’s political stance, while the 14th, 13th, and the 1st attribute -- crime, superfund-right-to-sue, handicapped-infants -- respectively contributes the least.
+From these weights, we can see that the 4th attribute, which is physician-fee-freeze, the 11th attribute, immigration, and the 3rd attribute, adoption-of-the-budget-resolution, contributes the most towards a person’s political stance, while the 14th, 13th, and the 1st attribute &mdash; crime, superfund-right-to-sue, handicapped-infants &mdash; respectively contributes the least.
 
 Below, we show the graph of average misclassification rate over epochs of training.
 
-\begin{center}
-\adjustimage{max size={0.4\linewidth}{0.9\paperheight}}{misclassification_rate.png}
-\end{center}
+<div align="center">
 
-    \hypertarget{5}{%
-\section{Scikit-learn's Perceptron}\label{5}}
+  <img src="figures/misclassification_rate.png" width=400>
+</div>
 
-We trained the same voting data using the Scikit-learn's Perceptron model. Since the train-test data are split randomly, the result isn't deterministic, but on average, it seems that Scikit-learn's model achieves an accuracy of 97\%. I tried changing the L1 and L2 regularization terms and there doesn't seem to be an $\alpha$ value that consistently improves the accuracy. I also tried changing the $\eta$ parameter and it would always lower the accuracy. This is probably because the voting data is quite linear and doesn't need much regularization.
+## Scikit-learn's Perceptron
 
-    \hypertarget{6}{%
-\section{Iris Dataset and Multiclass Perceptron}\label{6}}
+We trained the same voting data using the Scikit-learn's Perceptron model. Since the train-test data are split randomly, the result isn't deterministic, but on average, it seems that Scikit-learn's model achieves an accuracy of 97%. I tried changing the L1 and L2 regularization terms and there doesn't seem to be an $\alpha$ value that consistently improves the accuracy. I also tried changing the $\eta$ parameter and it would always lower the accuracy. This is probably because the voting data is quite linear and doesn't need much regularization.
+
+## Iris Dataset and Multiclass Perceptron
 
 The Iris Dataset consists of 50 samples from each of three species of Iris (Iris Setosa, Iris virginica, and Iris versicolor). Four features were measured from each sample: the length and the width of the sepals and petals, in centimeters. The task is to predict the species using these four features. Because there are more than 2 classes for this task, the Perceptron classifier was modified to be able to handle multiple class. First, the number of weights equals the number of features (and bias) times the number of classes, so for this task, there were 15 weights in total. Each set of 5 weights tries to classify the input features to one of the 3 species. The predicted output is the class that is the highest value out of the 3 classes which is then one-hot encoded to be used to update the weights. The target values are also one-hot encoded as a 3-dimensional vector. The process can be summarized as:
 
-\begin{center}
-    $\hat{y} = \underset{1 \leq j \leq 3}{\mathrm{argmax}} \hspace{1mm} Wx_i$
+
+$$\hat{y} = \underset{1 \leq j \leq 3}{\mathrm{argmax}} \hspace{1mm} Wx_i$$
     
-    $\hat{y} \leftarrow \mathrm{one\_hot}(\hat{y})$
+$$\hat{y} \leftarrow \mathrm{one\_hot}(\hat{y})$$
     
-    $\Delta W = \lambda (y - \hat{y}) \ast x_i$
+$$\Delta W = \lambda (y - \hat{y}) \ast x_i$$
     
-    $ W \leftarrow W + \Delta W $
-\end{center}
+$$ W \leftarrow W + \Delta W $$
 
 where $\ast$ operation behaves the way array broadcasting works in NumPy, so $(y - \hat{y}) \ast x_i$ results in a $3 \times 5$ matrix, the same shape as $W$. The resulting weights and accuracy of this task after doing a 70-30 train-test split are:
 
-\begin{center}
-Final Weights =   $\begin{bmatrix}
+Final Weights =   $`\begin{bmatrix}
     1.83 & 3.9 & -5.25 & -2.73 & 0.9 \\
     2.15  & 0.25 & -1.29 & -3.55 & 1.8 \\
     -3.98 & -4.15 & 6.54 & 6.28 & -2.7
-  \end{bmatrix}$
+  \end{bmatrix}`$
 
-Accuracy = 0.9556
-\end{center}
-    \end{document}
+Accuracy = $0.9556$
